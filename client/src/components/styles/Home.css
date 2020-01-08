@@ -1,0 +1,31 @@
+.Home{
+    background: url("https://s3-ap-south-1.amazonaws.com/instacar-live-wordpress-website/wp-content/uploads/2019/09/15062314/photo-41151-1.jpg");
+    min-height: 100vh;
+    object-fit: contain;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+}
+.ic-heading-home{
+    color:white;
+    margin:20px;
+}
+.ic-form-home{
+    background-color: rgba(0, 0, 0, 0.4);
+    margin:80px 40px 80px 40px ;
+    padding:10px;
+}
+.ic-form-1 {
+    margin:30px;
+}
+.react-datepicker-wrapper{
+    width:100%;
+}
+.react-datepicker__input-container input{
+    padding:5px 10px 5px 10px !important;
+    width:100%;
+}

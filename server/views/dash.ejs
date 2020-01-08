@@ -1,0 +1,93 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<br>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Add Driver
+</button>
+<button type="button" class="btn btn-warning" onclick="location.href = '/logout'">
+    Logout
+</button>
+<br>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Driver</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/addData" method="POST">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Name</label>
+                        <input type="text" name = "name"class="form-control" id="exampleFormControlInput1" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Age</label>
+                        <input type="number" name="age" class="form-control" id="exampleFormControlInput1" placeholder="Age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Email</label>
+                        <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Rate</label>
+                        <input type="number" name = "rate" class="form-control" id="exampleFormControlInput1" placeholder="16/Kms" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Language</label>
+                        <select multiple class="form-control" id="exampleFormControlSelect2" name="language" required>
+                            <option selected value="Malayalam">Malayalam</option>
+                            <option value="Tamil">Tamil</option>
+                            <option value="Kannada">Kannada</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br>
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Email</th>
+            <th scope="col">Language</th>
+            <th scope="col">Age</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(let j = 0 ; j < drivers.length ; j++){%>
+        <tr>
+            <th scope="row"><%=j+1%></th>
+            <td><%= drivers[j].name%></td>
+            <td><%= drivers[j].email%></td>
+            <td><%= drivers[j].language%></td>
+            <td><%= drivers[j].age%></td>
+            <td> <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="location.href = '/delete/<%= drivers[j].email%>';">Delete</button></td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</html>
