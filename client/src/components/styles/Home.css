@@ -1,6 +1,6 @@
 .Home{
     background: url("https://s3-ap-south-1.amazonaws.com/instacar-live-wordpress-website/wp-content/uploads/2019/09/15062314/photo-41151-1.jpg");
-    min-height: 100vh;
+    min-height: 150vh;
     object-fit: contain;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -28,4 +28,12 @@
 .react-datepicker__input-container input{
     padding:5px 10px 5px 10px !important;
     width:100%;
+}
+.react-time-picker__wrapper{
+    border:none !important;
+
+}
+.react-time-picker__wrapper input{
+    color:white !important;
+    width:50%;
 }

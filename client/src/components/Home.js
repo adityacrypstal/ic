@@ -27,7 +27,8 @@ class Welcome extends Component {
                 {"id":4,"name":"Ranveer","age":30,"rate":16,"language":"Kannada"}],
             filters:'',
             driversList : [],
-            time:'10:00'
+            time:'10:00',
+            amt:0,
 
         };
     }
@@ -42,7 +43,9 @@ class Welcome extends Component {
             driversList : this.state.drivers
         })
     }
-
+    numberFormat = (number) =>{
+        return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(number)
+    }
     formSubmit = async () =>{
         if(this.state.from == ""){
             swal("Oops!","Please Select Pickup Point","error")
@@ -69,8 +72,10 @@ class Welcome extends Component {
 
             let profile = JSON.parse(localStorage.getItem('icuser'))
             return(
-                <div className="home">
-                    <Button variant="outline-danger" onClick={this.logout}>Logout</Button>
+                <div className="home" style={{width:"90%"}}>
+                    <div class="text-right mb-3">
+                        <a href="#" class="btn btn-danger" onClick={this.logout} >Logout</a>
+                    </div>
                    <h1 align="center">Hai , {profile.name}</h1>
                     <Form>
                         <Form.Row>
@@ -93,18 +98,16 @@ class Welcome extends Component {
                         </Form.Group>
 
                         <Form.Row>
+                            <Form.Label style={{paddingTop:'10px',marginLeft:"50px"}}> Pickup Time</Form.Label>
                             <TimePicker
                                 onChange={this.onChange}
                                 value={this.state.time}
                             />
                         </Form.Row>
+                        <br></br>
 
-                        <Form.Group id="formGridCheckbox">
-                            <Form.Check type="checkbox" label="Check me out" />
-                        </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Submit
+                        <Button variant="primary" type="submit" onClick={()=>this.setState({page:4})}>
+                            Pay {this.numberFormat(this.state.amt)} /-
                         </Button>
                     </Form>
                 </div>
@@ -227,10 +230,10 @@ class Welcome extends Component {
                                                                 <li><b>Age</b>: {data.age}</li>
                                                                 <li><b>Language</b>: {data.language}</li>
                                                                 <li><b>Rate</b>: {data.rate}Rs/km</li>
-                                                                <li><b>Total</b>: {this.total(data.rate)}</li>
+                                                                <li><b>Total</b>: {this.numberFormat(this.total(data.rate))}/-</li>
                                                             </ul>
                                                         </Card.Text>
-                                                        <Button variant="primary" onClick={()=>{this.setState({driver:data.id,page:3})}}>Select</Button>
+                                                        <Button variant="primary" onClick={()=>{this.setState({driver:data.id,page:3,amt:this.total(data.rate)})}}>Select</Button>
                                                     </Card.Body>
                                                 </Card>
                                             </Col>
@@ -254,9 +257,9 @@ class Welcome extends Component {
                                 </Nav>
                             </Navbar.Collapse>
                         </Navbar>
-                        <div className="ic-form-home ic-form-calc">
+                        <div className="ic-form-home ic-form-calc" style={{width:"40%"}}>
                             <div className="container text-center ic-heading-home">
-                                <h1>Select Driver
+                                <h1 style={{textAlign:"left",paddingLeft:"50px"}}>Confirm Booking
                                 </h1>
                                 <div className="row">
                                     {this.profile()}
@@ -267,6 +270,35 @@ class Welcome extends Component {
                     </div>
                 );
                 break;
+            case 4:
+                let profile = JSON.parse(localStorage.getItem('icuser'))
+                return (
+                    <div className="Home">
+                        <Navbar bg="tranparent" expand="lg">
+                            <Navbar.Brand href="#home"><img src={"https://instacar.in/wp-content/themes/instacar/images/Insta-car-01-2.png"} alt=""/></Navbar.Brand>
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                                <Nav className="mr-auto">
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Navbar>
+                        <div className="ic-form-home ic-form-calc">
+                            <div className="container text-center ic-heading-home">
+                                <h1>Booking Successful
+                                </h1>
+                                <div className="row">
+                                    <h1 className="text-center">Thank You {profile.name}!</h1>
+                                    <br></br>
+
+                                </div>
+                                <div className="row ">
+                                    <p className="text-center">You have successfully paid {this.numberFormat(this.state.amt)}/-</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                )
         }
 
     }
