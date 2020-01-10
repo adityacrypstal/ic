@@ -52,7 +52,7 @@ class Welcome extends Component {
         }else if(this.state.to == ""){
             swal("Oops!","Please Select Dropping Point","error")
         }else{
-            let data = await axios.get(window.location.protocol + '//' + window.location.host + ':4000/read');
+            let data = await axios.get('http://13.233.149.105:4000/read');
             console.log(data.data)
             if(data.data){
                 this.setState({page:2,drivers:data.data,driversList:data.data})
